@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Light Sensor Configurator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="linkbar" id="linkbar" data-state="down">
+    <span class="lamp" aria-hidden="true"></span>
+    <div class="linkmeta">
+      <div class="who" id="who">No board linked</div>
+      <div class="addr" id="addr">Bluetooth Low Energy</div>
+    </div>
+    <button class="btn-link" id="link">Link</button>
+  </div>
+
+  <div class="verdict" id="verdict" data-kind="info" hidden></div>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Parameters</h2>
+      <span class="tag" id="prevScope">no board yet</span>
+    </div>
+    <div class="params">
+
+      <div class="field" id="fieldLevel" data-dirty="no">
+        <label for="level">Level</label>
+        <div class="duo">
+          <button class="prev" id="prevLevel" data-target="level" disabled>
+            <span class="cap">Previously saved</span>
+            <span class="val">—</span>
+            <span class="when">never</span>
+          </button>
+          <div class="stepper">
+            <button type="button" data-step="-1" data-target="level" aria-label="Decrease level">−</button>
+            <input type="number" id="level" value="50" min="0" max="255" step="1" inputmode="numeric">
+            <button type="button" data-step="1" data-target="level" aria-label="Increase level">+</button>
+          </div>
+        </div>
+        <div class="range" id="rangeLevel">0 – 255</div>
+      </div>
+
+      <div class="field" id="fieldTime" data-dirty="no">
+        <label for="time">Time</label>
+        <div class="duo">
+          <button class="prev" id="prevTime" data-target="time" disabled>
+            <span class="cap">Previously saved</span>
+            <span class="val">—</span>
+            <span class="when">never</span>
+          </button>
+          <div class="stepper">
+            <button type="button" data-step="-1" data-target="time" aria-label="Decrease time">−</button>
+            <input type="number" id="time" value="40" min="0" max="255" step="1" inputmode="numeric">
+            <button type="button" data-step="1" data-target="time" aria-label="Increase time">+</button>
+          </div>
+        </div>
+        <div class="range" id="rangeTime">0 – 255</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="btn-go" id="save" disabled>Save to board</button>
+    <p class="hint" id="hint"></p>
+  </div>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Transcript</h2>
+    </div>
+    <div class="tape" id="tape" aria-live="polite"></div>
+  </section>
+
+  <details class="card cfg" id="cfg">
+    <summary>Device settings</summary>
+    <div class="cfg-body">
+      <div class="cfg-row">
+        <label for="svc">Service UUID</label>
+        <input id="svc" value="0xffe0" spellcheck="false">
+      </div>
+      <div class="cfg-row">
+        <label for="chrW">Write characteristic</label>
+        <input id="chrW" value="0xffe1" spellcheck="false">
+      </div>
+      <div class="cfg-row">
+        <label for="chrN">Notify characteristic</label>
+        <input id="chrN" value="" placeholder="same as write" spellcheck="false">
+      </div>
+      <div class="cfg-row">
+        <label for="eol">Line ending</label>
+        <select id="eol">
+          <option value="lf">LF (\n)</option>
+          <option value="crlf">CRLF (\r\n)</option>
+          <option value="cr">CR (\r)</option>
+          <option value="none">none</option>
+        </select>
+      </div>
+      <div class="cfg-row">
+        <label for="cmdLevel">Set level</label>
+        <input id="cmdLevel" value="level={v}" spellcheck="false">
+      </div>
+      <div class="cfg-row">
+        <label for="cmdTime">Set time</label>
+        <input id="cmdTime" value="time={v}" spellcheck="false">
+      </div>
+      <div class="cfg-row">
+        <label for="cmdWrite">Save command</label>
+        <input id="cmdWrite" value="write" spellcheck="false">
+      </div>
+      <div class="cfg-row">
+        <label for="vmax">Maximum value</label>
+        <input id="vmax" type="number" value="255" min="1" step="1">
+      </div>
+      <p class="cfg-note wide">
+        <code>{v}</code> becomes the field value. Confirm both UUIDs against the board in nRF Connect —
+        modules vary, and some split writes onto <code>0xffe2</code>. Everything here, and the
+        saved history for each board, stays on this phone.
+      </p>
+      <div class="cfg-actions wide">
+        <button class="btn-forget" id="forget" type="button">Forget this board's history</button>
+      </div>
+    </div>
+  </details>
+
+  <footer>Chrome for Android · Web Bluetooth · writes chunked to the 20-byte ATT payload</footer>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
