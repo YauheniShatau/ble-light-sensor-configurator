@@ -138,7 +138,7 @@ export function showLinked(name, where) {
 
 export function showUnlinked() {
   who.textContent = "No board linked";
-  addr.textContent = "Bluetooth Low Energy";
+  addr.textContent = "BLE";
 }
 
 export const setScope = (text) => { prevScope.textContent = text; };

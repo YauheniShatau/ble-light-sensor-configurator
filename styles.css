@@ -48,6 +48,7 @@ img { max-width: 100%; }
     }
   }
   :root[data-theme="dark"] {
+    color-scheme: dark;
     --bg:        #12161A;
     --surface:   #1A2026;
     --sunken:    #0D1114;
