@@ -53,7 +53,7 @@ function deliver(line) {
 }
 
 /* ---- send ------------------------------------------------------------------- */
-async function write(text, eol) {
+export async function write(text, eol) {
   const bytes = new TextEncoder().encode(text + eol);
   hooks.onTx(text);
   const canAck = writeChr.properties.write;

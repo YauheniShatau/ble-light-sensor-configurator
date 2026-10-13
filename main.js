@@ -87,6 +87,18 @@ el("save").addEventListener("click", () => {
   ], "Saved to the board.", recordSave);
 });
 
+el("console").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const text = el("cmd").value;
+  if (!text.trim()) return;
+  try {
+    await ble.write(text, lineEnding());
+    el("cmd").value = "";
+  } catch (err) {
+    ui.say("wrong", `Send failed: ${(err && err.message) || err}`);
+  }
+});
+
 /* ---- field interaction --------------------------------------------------------- */
 for (const b of document.querySelectorAll("[data-step]")) {
   b.addEventListener("click", () => {

@@ -86,6 +86,8 @@ export function refresh() {
   }
 
   saveBtn.disabled = !ready || !changed;
+  el("cmd").disabled = !ready;
+  el("send").disabled = !ready;
 
   if (!live) hint.textContent = "Link the board to edit the values.";
   else if (busy) hint.textContent = "Talking to the board…";
