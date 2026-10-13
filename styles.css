@@ -351,6 +351,25 @@ img { max-width: 100%; }
   .tape .row[data-kind="wrong"] .body { color: var(--wrong); font-weight: 700; }
   .tape .row[data-dir="note"] { grid-template-columns: 1fr; }
   .tape .row[data-dir="note"] .body { color: var(--muted); font-style: italic; font-family: var(--sans); }
+  .console {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+  }
+  .console input {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 7px 9px;
+    color: var(--ink);
+    background: var(--sunken);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .console input:disabled { opacity: .45; }
+  .console .btn-2nd { padding: 7px 14px; }
   .tag {
     font-family: var(--panel);
     font-size: 11px;
